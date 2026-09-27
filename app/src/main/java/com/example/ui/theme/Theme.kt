@@ -1,0 +1,72 @@
+package com.example.ui.theme
+
+import android.app.Activity
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+
+private val GamingColorScheme = darkColorScheme(
+    primary = DiscordBlurple,
+    onPrimary = TextPrimary,
+    primaryContainer = DiscordBlurpleDark,
+    onPrimaryContainer = TextPrimary,
+    secondary = NeonCyan,
+    onSecondary = DiscordDarkest,
+    secondaryContainer = DiscordDark,
+    onSecondaryContainer = NeonCyan,
+    tertiary = NeonPink,
+    onTertiary = TextPrimary,
+    background = DiscordDarkest,
+    onBackground = TextPrimary,
+    surface = DiscordDarker,
+    onSurface = TextPrimary,
+    surfaceVariant = DiscordDark,
+    onSurfaceVariant = TextSecondary,
+    outline = BorderSubtle,
+    outlineVariant = BorderAccent,
+    error = NeonRed,
+    onError = TextPrimary
+)
+
+val GamingShapes = Shapes(
+    small = RoundedCornerShape(8.dp),
+    medium = RoundedCornerShape(12.dp),
+    large = RoundedCornerShape(16.dp),
+    extraLarge = RoundedCornerShape(24.dp)
+)
+
+@Composable
+fun MyApplicationTheme(
+    darkTheme: Boolean = true, // Gaming Hub default is dark mode
+    dynamicColor: Boolean = false, // Keep Discord branding aesthetic
+    content: @Composable () -> Unit
+) {
+    val colorScheme = GamingColorScheme
+
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as? Activity)?.window
+            if (window != null) {
+                window.statusBarColor = DiscordDarkest.toArgb()
+                window.navigationBarColor = DiscordDarkest.toArgb()
+                WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+                WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = false
+            }
+        }
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        shapes = GamingShapes,
+        content = content
+    )
+}

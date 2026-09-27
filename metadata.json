@@ -1,0 +1,8 @@
+{
+  "name": "กลุ่มเล่นเกม",
+  "description": "Game Group Discord Hub - Discord Server Community \u0026 Gaming Center",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
